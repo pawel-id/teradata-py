@@ -6,7 +6,12 @@ using venv
 
 ```bash
 python -m venv venv
+
+# macOS/Linux
 source venv/bin/activate
+
+# Windows Cmd
+venv\Scripts\activate.bat
 ```
 
 persist and restore dependencies
