@@ -12,7 +12,8 @@ password = os.getenv('TD_PASSWORD')
 
 with teradatasql.connect(host=host, user=user, password=password) as con:
     with con.cursor() as cur:
-        cur.execute("SELECT * FROM DEMO_PI.employees")
+        # This should work on any Teradata instance
+        cur.execute("SELECT * FROM DBC.DBCInfo")
         rows = cur.fetchall()
         for row in rows:
             print(row)
