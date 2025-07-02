@@ -10,9 +10,23 @@ host = os.getenv('TD_HOST')
 user = os.getenv('TD_USER')
 password = os.getenv('TD_PASSWORD')
 
-with teradatasql.connect(host=host, user=user, password=password) as con:
+# Optional connection options
+tmode = os.getenv('TD_TMODE', None)
+encryptdata = os.getenv('TD_ENCRYPTDATA', None)
+
+connect_args = {
+    'host': host,
+    'user': user,
+    'password': password
+}
+
+if tmode:
+    connect_args['tmode'] = tmode
+if encryptdata:
+    connect_args['encryptdata'] = encryptdata
+
+with teradatasql.connect(**connect_args) as con:
     with con.cursor() as cur:
-        # This should work on any Teradata instance
         cur.execute("SELECT * FROM DBC.DBCInfo")
         rows = cur.fetchall()
         for row in rows:
